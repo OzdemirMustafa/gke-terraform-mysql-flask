@@ -1,0 +1,1 @@
+python3 dupids.py password.txt | awk -F: '{print $1}'
