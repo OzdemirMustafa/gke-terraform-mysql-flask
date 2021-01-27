@@ -48,7 +48,7 @@ module "gke" {
     name               = "microservices"
     machine_type       = "n1-standard-1"
     min_count          = 1
-    max_count          = 5
+    max_count          = 2
     initial_node_count = 2
   }]
 
