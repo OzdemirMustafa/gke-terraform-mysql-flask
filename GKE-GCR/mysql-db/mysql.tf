@@ -1,20 +1,22 @@
-
 provider "google" {
   project     = "robotic-jet-301718"
   region      = "europe-west3"
 }
 
+variable "password" { default = "" }
+
 locals {
-  onprem = ["212.154.55.130","78.191.2.231"]
+  onprem = ["34.91.134.8","77.92.114.18","85.100.66.45"]
 }
 
 
 resource "google_sql_database_instance" "master" {
-  name = "mysql-instance"
+  name = "mysqldb-instance"
   database_version = "MYSQL_5_6"
   region = "europe-west3"
   project = "robotic-jet-301718"
-
+  deletion_protection = false
+  
 
   settings {
     tier = "db-f1-micro"
@@ -34,15 +36,16 @@ resource "google_sql_database_instance" "master" {
           name = "onprem-${onprem.key}"
           value = onprem.value
         }
+        
       }
     }
   }
 }
 
 resource "google_sql_user" "mysql" {
-  name = "mysql"
+  name = "mysqluser"
   instance = google_sql_database_instance.master.name
-  password = "UbX4YmyuCzxKrQ"
-  project = "robotic-jet-301718"
+  password = var.password
+  project = "robotic-jet-301718"  
 
 }

@@ -18,3 +18,5 @@
 .DS_Store
 .bash_history
 .gitconfig
+terraform.tfstate
+terraform.tfstate.backup

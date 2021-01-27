@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
 
-helm repo add stable https://kubernetes-charts.storage.googleapis.com
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 
-helm install nginx stable/nginx-ingress  \
-    --set rbac.create=true
+helm repo update
 
-printf "IP of nginx: "kubectl get svc nginx-nginx-ingress-controller -o jsonpath="{.status.loadBalancer.ingress[0].ip}"
-echo ""
+helm install ingress-nginx ingress-nginx/ingress-nginx
